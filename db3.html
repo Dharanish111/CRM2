@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="db3.css">
+</head>
+<body>
+    <div class="main-header">
+        <img src="Images/pic6.png" alt="ATS Logo" class="header-logo">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button onclick="search()">🔍</button>
+            
+        </div>
+
+        <div class="user-profile">
+            <div class="icon-container" style="display: flex; align-items: center;">
+                <!-- Bell Icon for Notifications -->
+                <i class="fas fa-bell bell-icon" style="margin-right: 10px;"></i>
+                
+                <!-- Theme Selection Icon -->
+                <i class="fas fa-sun theme-icon" style="margin-right: 10px;"></i>
+                
+                <!-- Language Selection Dropdown -->
+                <div class="language-dropdown" style="position: relative;">
+                    <button class="lang-btn" style="background: none; border: none; cursor: pointer; font-size: 16px; margin-right: 10px;">
+                        <i class="fas fa-globe" style="margin-right: 10px; font-size: 28px; color: #091229e3;"></i> <!-- Globe icon for language -->
+                    </button>
+                    <div class="lang-dropdown-content" style="display: none; position: absolute; background-color: white; border: 1px solid #ddd; padding: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                        <a href="#" class="lang-option">English</a>
+                        <a href="#" class="lang-option">Spanish</a>
+                        <a href="#" class="lang-option">French</a>
+                        <a href="#" class="lang-option">German</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    
+        <div class="user-profile">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Picture" class="user-img">
+            <div>
+                <span style="margin-right: 95px; text-align: center;">P.Dharanish</span> 
+                <p id="date-time" style="font-size: 1em; color: #555; margin-top: 0;"> 
+                </p>
+            </div>
+            
+            <div class="hamburger-container" onclick="toggleSidebar()">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" onclick="showHome()"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#" onclick="showProducts()"><i class="fas fa-box"></i> Products</a></li>
+                <li><a href="#" onclick="showOrders()"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+                <li><a href="#" onclick="showClients()"><i class="fas fa-users"></i> Clients</a></li>
+                <li><a href="#" onclick="showEquipment()"><i class="fas fa-cogs"></i> Equipment</a></li>
+                <li><a href="#" onclick="showSales()"><i class="fas fa-chart-line"></i> Sales</a></li>
+                <li><a href="#" onclick="showStaff()"><i class="fas fa-user-tie"></i> Staff</a></li>
+                <li><a href="#" onclick="showContact()"><i class="fas fa-address-book"></i> Contact</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content" id="main-content">
+            <!-- Default Content (Home or initial view) -->
+            <section id="home-content" class="description" >
+                    <header style="margin-top: 1380px;  display: flex">
+                    </header>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 13px; justify-content: space-evenly; margin-top: 10px;">
+                        <!-- Milk Production Today -->
+                        <div style="width: 21%; background-color: #f4f7fb; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #478be4; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/milk.png" alt="Milk Production" style="width: 50px; height: 60px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #478be4; margin-left: 0px;">
+                                    Milk Production Today
+                                </h3>
+                                <p id="milk-production" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 65px">500L</p>
+                            </div>
+                        </div>
+
+                        <!-- Cattle Count -->
+                        <div style="width: 21%; background-color: #f0f9ff; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #67c8ff; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/cattle.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #67c8ff; margin-left: 39px;">
+                                    Cattle Count
+                                </h3>
+                                <p id="cattle-count" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 75px">100</p>
+                            </div>
+                        </div>
+
+                        <!-- Total Revenue -->
+                        <div style="width: 21%; background-color: #e7f6f1; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #55d28b; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/revenue.png" alt="Milk Production" style="width:  70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #55d28b; margin-left: 30px;">Total Revenue</h3>
+                                <p id="total-revenue" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 60px">₹1200</p>
+                            </div>
+                        </div>
+
+                        <!-- Feed Consumption -->
+                        <div style="width: 21%; background-color: #fff9e5; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #fbc02d; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/feed.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #fbc02d; margin-left: 15px;">Feed Consumption</h3>
+                                <p id="feed-consumption" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 65px">300kg</p>
+                            </div>
+                        </div>
+
+                        <!-- Staff Attended -->
+                        <div style="width: 21%; background-color: #f1e8ff; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #9a63c5; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/staff.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #9a63c5; margin-left: 30px;">Staff Attended</h3>
+                                <p id="staff-attended" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 70px;">12</p>
+                            </div>
+                        </div>
+
+                        <!-- Active Tasks -->
+                        <div style="width: 21%; background-color: #e8f4f4; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #4cb7b7; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/tasks.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #4cb7b7; margin-left: 45px;">Active Tasks</h3>
+                                <p id="active-tasks" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 90px;">8</p>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance Tasks -->
+                        <div style="width: 21%; background-color: #f5e5ff; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #9b4cd4; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/maintenance.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #9b4cd4; margin-left: 15px;">Maintenance Tasks</h3>
+                                <p id="maintenance-tasks" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 75px">3</p>
+                            </div>
+                        </div>
+
+                        <!-- Veterinary Visits -->
+                        <div style="width: 21%; background-color: #d3e4f4; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #4591d9; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/veterinary.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #4591d9; margin-left: 15px;">Veterinary Visits</h3>
+                                <p id="veterinary-visits" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 75px">2</p>
+                            </div>
+                        </div>
+
+
+                    <!-- Container for the four charts -->
+                    <div style="display: flex; justify-content: space-between; gap: 20px; margin-top: 3px;">
+
+                        <!-- Dairy Products Sales Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Production Analysis</h3>
+
+                            <!-- Filter Dropdown for Sales Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="sales-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Sales Period:</label>
+                                <select id="sales-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateDairyChartData()">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+
+                            <!-- Pie chart for Dairy Products Sales -->
+                            <canvas id="dairy-products-sales-chart" style="width: 570px; height: 100px;"></canvas>
+                        </div>
+
+                        <!-- Animal Health Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Animal Health</h3>
+
+                            <!-- Filter Dropdown for Health Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="health-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Animal:</label>
+                                <select id="health-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateHealthChartData()">
+                                    <option value="daily">Buffalo</option>
+                                    <option value="weekly">Cow</option>
+                                    <option value="yearly">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Donut chart for Animal Health -->
+                            <canvas id="animal-health-chart" style="width: 570px; height: 100px;"></canvas>
+                        </div>
+                    </div>
+
+
+                    <div style="display: flex; justify-content: space-between; gap: 20px; margin-top: 3px;">
+                        <!-- Product Sales Line Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Product Sales</h3>
+
+                            <!-- Filter Dropdown for Product Sales Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="product-sales-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Product:</label>
+                                <select id="product-sales-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateProductSalesChartData()">
+                                    <option value="daily">Milk</option>
+                                    <option value="weekly">Curd</option>
+                                    <option value="yearly">Ghee</option>
+                                    <option value="yearly">Paneer</option>
+
+                                </select>
+                            </div>
+
+                            <!-- Line chart for Product Sales -->
+                            <canvas id="product-sales-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+
+                        <!-- Delivery and Logistics Bar Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Delivery and Logistics</h3>
+
+                            <!-- Filter Dropdown for Delivery Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="delivery-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Delivery Period:</label>
+                                <select id="delivery-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateDeliveryChartData()">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+
+                            <!-- Bar chart for Delivery and Logistics -->
+                            <canvas id="delivery-logistics-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    
+                    
+                    <!-- Bottom Sections for Graphs -->
+                    <div style="margin-top: 3px; display: flex; justify-content: space-between; gap: 20px;">
+                        <div style="width: 48%; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Milk Production Over Time</h3>
+                            <canvas id="milk-production-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+                        <div style="width: 48%; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Revenue</h3>
+                            <canvas id="revenue-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+                    </div>
+                
+            </section>
+        </main>
+
+        
+        
+    </div>
+
+    <script>
+        function search() {
+            const searchTerm = document.getElementById('search-input').value;
+            console.log('Search Term:', searchTerm);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        function showSales() {
+            const mainContent = document.getElementById('main-content');
+            const salesContent = `
+                <section id="sales-content">
+                    <h2>Sales</h2>
+
+                    <!-- Dropdown for selecting time period -->
+                    <label for="timePeriod">Select Time Period:</label>
+                    <select id="timePeriod">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly" selected>Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+
+                    <!-- Pie Chart Container -->
+                    <canvas id="salesPieChart" width="400" height="400"></canvas>
+
+                    <!-- Bar Chart Container -->
+                    <canvas id="salesBarChart" width="400" height="400"></canvas>
+                </section>
+            `;
+            mainContent.innerHTML = salesContent;
+
+            // Data for each period
+            const salesData = {
+                weekly: [50, 30, 20, 40, 25, 15],    // Weekly data
+                monthly: [500, 200, 150, 500, 200, 150],  // Monthly data
+                yearly: [6000, 2400, 1800, 6000, 2400, 1800]   // Yearly data
+            };
+
+            // Labels for the charts
+            const labels = ['Milk ltr', 'Cheese kgs', 'Butter kgs', 'Curd kgs', 'Ghee ltr', 'Paneer kgs'];
+
+            // Pie Chart Data
+            const pieData = {
+                labels: labels,
+                datasets: [{
+                    data: salesData.monthly, // Default to monthly
+                    backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33F6', '#F6FF33', '#33F6FF'],
+                    hoverBackgroundColor: ['#FF6F61', '#6BFF61', '#619DFF', '#FF61D4', '#F6FF61', '#61F6FF'],
+                }]
+            };
+
+            // Bar Chart Data
+            const barData = {
+                labels: labels,
+                datasets: [{
+                    label: 'Items Sold',
+                    data: salesData.monthly, // Default to monthly
+                    backgroundColor: [
+                        '#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#9B59B6', '#1ABC9C'
+                    ],
+                    borderColor: [
+                        '#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#9B59B6', '#1ABC9C'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Create Pie Chart
+            const ctxPie = document.getElementById('salesPieChart').getContext('2d');
+            const pieChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: pieData,
+            });
+
+            // Create Bar Chart
+            const ctxBar = document.getElementById('salesBarChart').getContext('2d');
+            const barChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: barData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Update charts based on selected time period
+            const timePeriodSelect = document.getElementById('timePeriod');
+            timePeriodSelect.addEventListener('change', function () {
+                const selectedPeriod = timePeriodSelect.value;
+
+                // Update data for pie chart and bar chart
+                pieChart.data.datasets[0].data = salesData[selectedPeriod];
+                barChart.data.datasets[0].data = salesData[selectedPeriod];
+
+                // Re-render the charts
+                pieChart.update();
+                barChart.update();
+            });
+
+            // Add CSS for spacing
+            const pieChartCanvas = document.getElementById('salesPieChart');
+            const barChartCanvas = document.getElementById('salesBarChart');
+
+            // Adding a margin to the bar chart for spacing
+            barChartCanvas.style.marginTop = "50px";
+        }
+
+        function showOrders() {
+            const mainContent = document.getElementById('main-content');
+            const ordersContent = `
+                <section id="orders-content" class="orders-section">
+                    <h2>Recent Orders</h2>
+                    <!-- Filter Buttons -->
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterOrders('all')">All</button>
+                        <button class="filter-btn" onclick="filterOrders('delivered')">Delivered</button>
+                        <button class="filter-btn" onclick="filterOrders('in-transit')">In Transit</button>
+                        <button class="filter-btn" onclick="filterOrders('pending')">Pending</button>
+                    </div>
+
+                    <!-- Orders Grid -->
+                    <div class="orders-grid" id="orders-grid">
+                        <!-- Delivered Orders -->
+                        <div class="order-card delivered" onclick="showOrderDetails('Order #001 - Customer: Ramu', ['Milk 1 ltr', 'Curd 500 grms', 'Ghee 250 ml'], '₹590')">
+                            <div class="order-header">
+                                <h3>Order #001 - Customer: Ramu</h3>
+                                <span class="status delivered">Delivered</span>
+                            </div>
+                        </div>
+                        <div class="order-card in-transit" onclick="showOrderDetails('Order #002 - Customer: Raju', ['Milk 1 ltr', 'Curd 500 grms', 'Paneer 750 grms'], '₹325')">
+                            <div class="order-header">
+                                <h3>Order #002 - Customer: Raju</h3>
+                                <span class="status in-transit">In Transit</span>
+                            </div>
+                        </div>
+                        <div class="order-card pending" onclick="showOrderDetails('Order #003 - Customer: Somu', ['Milk 500 ml', 'Curd 250 grms'], '₹140')">
+                            <div class="order-header">
+                                <h3>Order #003 - Customer: Somu</h3>
+                                <span class="status pending">Pending</span>
+                            </div>
+                        </div>
+                        <div class="order-card delivered" onclick="showOrderDetails('Order #004 - Customer: Raghu', ['Milk 1 ltr', 'Curd 500 grms'], '₹150')">
+                            <div class="order-header">
+                                <h3>Order #004 - Customer: Raghu</h3>
+                                <span class="status delivered">Delivered</span>
+                            </div>
+                        </div>
+                        <div class="order-card in-transit" onclick="showOrderDetails('Order #005 - Customer: Ramesh', ['Milk 2.5 ltrs', 'Curd 1.5 kgs'], '₹520')">
+                            <div class="order-header">
+                                <h3>Order #005 - Customer: Ramesh</h3>
+                                <span class="status in-transit">In Transit</span>
+                            </div>
+                        </div>
+                        <div class="order-card pending" onclick="showOrderDetails('Order #006 - Customer: Suresh', ['Milk 1 ltr', 'Curd 500 grms'], '₹140')">
+                            <div class="order-header">
+                                <h3>Order #006 - Customer: Suresh</h3>
+                                <span class="status pending">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Floating Window for Order Details -->
+                <div id="floating-window" class="floating-window">
+                    <button class="close-btn" onclick="closeFloatingWindow()">&#10006;</button>
+                    <h3 id="order-title"></h3>
+                    <div id="order-items"></div>
+                    <div id="order-total"></div>
+                </div>
+
+            `;
+            mainContent.innerHTML = ordersContent;
+        }
+
+        // Filter orders based on status
+        function filterOrders(status) {
+            const ordersGrid = document.getElementById('orders-grid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Reset the filter button styles
+            filterButtons.forEach(button => button.classList.remove('active'));
+            
+            // Set the active filter button
+            document.querySelector(`.filter-btn[onclick="filterOrders('${status}')"]`).classList.add('active');
+            
+            // Show all orders by default
+            const allOrders = ordersGrid.querySelectorAll('.order-card');
+            
+            // Hide or show orders based on selected filter
+            if (status === 'all') {
+                allOrders.forEach(order => order.style.display = 'block');
+            } else {
+                allOrders.forEach(order => {
+                    if (order.classList.contains(status)) {
+                        order.style.display = 'block';
+                    } else {
+                        order.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Show order details in floating window
+        function showOrderDetails(title, items, total) {
+            const floatingWindow = document.getElementById('floating-window');
+            const orderTitle = document.getElementById('order-title');
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+            const mainContent = document.getElementById('main-content');
+
+            // Update the floating window content
+            orderTitle.innerText = title;
+            orderItems.innerHTML = items.map(item => `<p>${item}</p>`).join('');
+            orderTotal.innerHTML = `<p class="total">Total: ${total}</p>`;
+
+            // Display the floating window
+            floatingWindow.style.display = 'block';
+
+            // Apply blur to the background
+            //mainContent.style.filter = 'blur(5px)';
+        }
+
+        // Close the floating window
+        function closeFloatingWindow() {
+            const floatingWindow = document.getElementById('floating-window');
+            const mainContent = document.getElementById('main-content');
+
+            // Hide the floating window
+            floatingWindow.style.display = 'none';
+
+            // Remove the blur effect from the background
+            mainContent.style.filter = 'none';
+        }
+
+        // Inline CSS for the orders section
+        const styles = `
+
+            /* Floating Window for Order Details */
+            .floating-window {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                z-index: 1000;
+                max-width: 400px;
+                display: none;
+                width: 100%;
+                max-height: 80%;
+                overflow-y: auto;
+            }
+            .floating-window h3 {
+                margin-top: 0;
+            }
+            .floating-window .close-btn {
+                background-color: #f44336;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                float: right;
+            }
+
+            /* Apply the blur effect only to the main content */
+            #main-content {
+                transition: filter 0.3s ease;
+            }
+            .floating-window {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1001; /* Ensure it stays above the blurred background */
+            }
+        `;
+
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = styles;
+        document.head.appendChild(styleSheet);
+
+        
+
+        function showClients() {
+            const mainContent = document.getElementById('main-content');
+            const clientsContent = `
+                <section id="clients-content">
+                    <h2>Customer Reviews</h2>
+                    <ul class="product-list">
+                        <li class="product-item" style="background-color:; " >
+                            <img src="https://i.ytimg.com/vi/xfvfzu6ZnIw/maxresdefault.jpg" alt="Milk Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Delhiwala </h3>
+                                <p>Delhiwala sources fresh milk, curd, and ghee from our farm, ensuring the highest quality ingredients for their wide range of traditional sweets and snacks. Their commitment to using premium dairy products helps them deliver authentic flavors and textures that are beloved by their customers.</p>
+                                <p>Location: Hyderabad</p>
+                                <p>Date: 23-02-2025</p>
+                                <p>Milk-300 lts</P>
+                                <p>Curd-50 kgs</P>
+                                <p><strong>Rating: <span style="color: gold;">★★★★☆</span></strong></p>
+                            </div>
+                        </li>
+                        <li class="product-item" >
+                            <img src="https://content.jdmagicbox.com/v2/comp/hyderabad/u6/040pxx40.xx40.171124162004.y2u6/catalogue/balaji-mithai-bandar-lalapet-hyderabad-sweet-shops-s129v.jpg" alt="Cheese Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Balaji Mithai Bandar</h3>
+                                <p>Balaji Mithai Bandar purchases milk, curd, and ghee from our farm to create their premium sweets and snacks. Our high-quality dairy is integral to maintaining the fresh taste and texture of their offerings, ensuring a delightful experience for every customer.</p>
+                                <p>Location: Hyderabad</p>
+                                <p>Date: 23-02-2025</p>
+                                <p>Milk-300 lts</P>
+                                <p>Curd-50 kgs</P>
+                                <p><strong>Rating: <span style="color: gold;">★★★★☆</span></strong></p>    
+                            </div>
+                        </li>
+                        <li class="product-item" >
+                            <img src="https://www.kailashsweets.com/blog/wp-content/uploads/2017/09/nanpurA-948x1024.jpg" alt="Butter Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Kailash Sweets</h3>
+                                <p>Kailash Sweets regularly purchases fresh milk, curd, and ghee from our farm to create their renowned selection of Indian mithai and snacks. The rich quality of our dairy ensures that their sweets maintain the perfect taste and consistency, satisfying their customers with every bite.</p>
+                                <p>Location: Hyderabad</p>
+                                <p>Date: 23-02-2025</p>
+                                <p>Milk-300 lts</P>
+                                <p>Curd-50 kgs</P>
+                                <p><strong>Rating: <span style="color: gold;">★★★★☆</span></strong></p>
+                            </div>
+                        </li>
+                        <li class="product-item" >
+                            <img src="https://content3.jdmagicbox.com/comp/vizianagaram/u3/9999p8922.8922.160720103315.j9u3/catalogue/mahalakshmi-sweets-vizianagaram-wbzcu0tplf.jpg" alt="Curd Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Mahalakshmi Sweets</h3>
+                                <p>Mahalakshmi relies on our farm’s milk, curd, and ghee to craft their exquisite assortment of traditional sweets. By using top-quality dairy products, they consistently deliver rich and flavorful mithai that has earned them a loyal customer base.</p>
+                                <p>Location: Hyderabad</p>
+                                <p>Date: 23-02-2025</p>
+                                <p>Milk-300 lts</P>
+                                <p>Curd-50 kgs</P>
+                                <p><strong>Rating: <span style="color: gold;">★★★★☆</span></strong></p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </section>
+            `;
+            mainContent.innerHTML = clientsContent;
+        }
+
+        function showEquipment() {
+            const mainContent = document.getElementById('main-content');
+            const EquipmentContent = `
+                <section id="Equipment-content" class="Equipment-section">
+                    <h2 style="text-align: center; font-size: 40px;">Diary Farm Equipment</h2>
+                    <div class="equipment-item">
+                        <h3>Milking Machine</h3>
+                        <img src="https://cdn.moglix.com/p/9N7x5WS3jQmCL.jpg" alt="Milking Machine logo" style="display: block; margin: -41px auto 0 auto; width: 600px; height: auto;">
+                        <p style="margin-top: 30px;">The milking machine helps in efficiently milking cows, reducing manual labor and increasing milk production efficiency.The principle of machine milking is to extract milk from the cow by vacuum. The machines are designed to apply a constant vacuum to the end of the teat to suck the milk out and convey it to a suitable container, and to give a periodic squeeze applied externally to the whole of the teat to maintain blood circulation.</p>
+                        <p>
+                        ➔ <strong>Regular Cleaning</strong>: After every milking session<br>
+                        ➔ <strong>Vacuum System Inspection</strong>: Weekly<br>
+                        ➔ <strong>Replace Worn Parts</strong>: Every 6 months<br>
+                        ➔ <strong>Lubricate Moving Parts</strong>: Monthly<br>
+                        ➔ <strong>Monitor Electrical Components</strong>: Monthly<br>
+                        ➔ <strong>Milk Flow Check</strong>: Bi-weekly<br>
+                        ➔ <strong>Calibration</strong>: Annually<br>
+                        ➔ <strong>Sterilization</strong>: Monthly
+                        </p>
+
+                    </div>
+
+                    <div class="equipment-item">
+                        <h3>Automatic Feeder</h3>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRODLQFGAd1BrIGAhQMoEmMf3IsZ5TMJLzrlg&s" alt="Automatic Feeder logo" style="display: block; margin: 50px auto 0 auto; width: 550px; height: auto;">
+                        <p style="margin-top: 50px;">A dairy automatic feeder is a system on a dairy farm that automatically dispenses a predetermined amount of feed to cows throughout the day, often allowing for customized feeding based on individual cow needs, eliminating the need for manual feeding and ensuring consistent access to fresh feed, which can improve milk production and overall herd health; it typically includes a feed mixing station, storage bins, and a distribution mechanism that delivers the feed to feeding stations within the barn. Automatic feeders help in distributing feed to livestock at scheduled intervals, ensuring they are properly fed without manual effort.</p>
+                        <p>
+                        ➔ <strong>Automatic Feeding</strong>: Dispenses predetermined feed to cows throughout the day<br>
+                        ➔ <strong>Customized Feeding</strong>: Adjusts feed based on individual cow needs<br>
+                        ➔ <strong>Improves Milk Production</strong>: Ensures consistent access to fresh feed for better herd health<br>
+                        ➔ <strong>System Components</strong>: Includes a feed mixing station, storage bins, and distribution mechanism<br>
+                        ➔ <strong>Eliminates Manual Labor</strong>: Distributes feed at scheduled intervals without manual effort
+                        </p>
+                    </div>
+
+                    <div class="equipment-item">
+                        <h3>Feed Mixer</h3>
+                        <img src="https://5.imimg.com/data5/MK/WG/MY-10910547/tmr-cattle-feed-mixer-500x500.jpg" alt="Feed Mixer logo" style="display: block; margin: -41px auto 0 auto; width: 550px; height: auto;">
+                        <p style="margin-top: -15px;">Feed mixers are used to mix animal feed to ensure cows receive the proper nutrition for healthy milk production.A feed mixer is a specialized agricultural machine designed to blend different types of animal feed ingredients into a uniform and well-balanced mixture.</p>
+                        <p>
+                        ➔ <strong>Feed Mixers</strong>: Blend different feed ingredients into a uniform mixture<br>
+                        ➔ <strong>Ensures Proper Nutrition</strong>: Provides cows with balanced nutrition for healthy milk production<br>
+                        ➔ <strong>Specialized Machine</strong>: Designed for efficient blending of animal feed ingredients
+                        </p>
+                    </div>
+
+                    <div class="equipment-item">
+                        <h3>Manure Spreader</h3>
+                        <img src="https://image.made-in-china.com/318f0j00ZTYGqVCtqWUv/%E6%92%92%E7%B2%AA%E6%9C%BA%E8%A7%86%E9%A2%91.mp4.webp" alt="Manure Spreader logo" style="display: block; margin: -41px auto 0 auto; width: 500px; height: auto;">
+                        <p style="margin-top: -15px;">A dairy manure spreader is an agricultural machine, typically towed behind a tractor, designed to evenly distribute solid or liquid manure from dairy cows across a field as a natural fertilizer, using a rotating mechanism powered by the tractor's PTO (power take-off) to spread the manure consistently across the land; it can include features like beaters, augers, and adjustable spreading patterns to control application rates depending on the type of manure and desired field conditions.</p>
+                        <p>
+                        ➔ <strong>Dairy Manure Spreader</strong>: Towed behind a tractor to evenly distribute manure as fertilizer<br>
+                        ➔ <strong>Powered by PTO</strong>: Uses a rotating mechanism powered by the tractor’s PTO<br>
+                        ➔ <strong>Adjustable Features</strong>: Includes beaters, augers, and adjustable spreading patterns for controlled application<br>
+                        ➔ <strong>Customizable Application</strong>: Controls manure spread based on type and field conditions
+                        </p
+                    </div>
+
+                    <div class="equipment-item">
+                        <h3>Tractor</h3>
+                        <img src="https://i.ytimg.com/vi/YSRXOUyBLco/hqdefault.jpg" alt="Tractor logo" style="display: block; margin: 50px auto 0 auto; width: 500px; height: auto;">
+                        <p style="margin-top: 50px;">A dairy tractor is a tractor used on a dairy farm to push feed to cows, and can also be used for other tasks. Dairy tractors can be electric and have features like cameras, work lights, and data collection. Tractors are essential for a variety of farm tasks, such as plowing fields, hauling heavy loads, and transporting equipment.</p>
+                        <p>
+                        ➔ <strong>Dairy Tractor</strong>: Used to push feed to cows and for various other farm tasks<br>
+                        ➔ <strong>Electric Models</strong>: Available with features like cameras, work lights, and data collection<br>
+                        ➔ <strong>Multi-Tasking</strong>: Essential for plowing, hauling, and transporting equipment
+                        </p>
+
+                    </div>
+
+                </section>
+            `;
+            mainContent.innerHTML = EquipmentContent;
+        }
+
+        let staffData = [
+            { id: 1, name: "Ramu", role: "Farm Worker", email: "ramu@example.com", shift: "Morning", Rating: 4.5, salary: "₹3,150" },
+            { id: 2, name: "Raju", role: "Veterinarian", email: "raju@example.com", shift: "Afternoon", Rating: 4.8, salary: "₹4,200" }
+        ];
+
+        // Helper function to display stars based on performance score
+        function renderRatingStars(score) {
+            const fullStars = Math.floor(score); // Full stars (integer part of the score)
+            const halfStar = score % 1 >= 0.5 ? 1 : 0; // Half star if score has a decimal of 0.5 or more
+            const emptyStars = 5 - fullStars - halfStar; // Remaining stars are empty
+
+            // Create star icons
+            let stars = '';
+            stars += '⭐'.repeat(fullStars); // Full stars
+            stars += halfStar ? '🌟' : ''; // Half star if needed
+            stars += '☆'.repeat(emptyStars); // Empty stars
+
+            return stars;
+        }
+
+        function showStaff() {
+            const mainContent = document.getElementById('main-content');
+            const StaffContent = `
+                <section id="Staff-content" class="Staff-section">
+                    <h2 style="text-align: center; margin-top: -10px; width:900px; margin-left: 100px; ">Staff Management Dashboard</h2>
+                    <div class="container">
+                    
+                        <!-- Staff Table -->
+                        <section class="staff-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Email</th>
+                                        <th>Shift</th>
+                                        <th>Rating</th>
+                                        <th>Salary</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${staffData.map(staff => `
+                                        <tr data-id="${staff.id}">
+                                            <td>${staff.id}</td>
+                                            <td>${staff.name}</td>
+                                            <td>${staff.role}</td>
+                                            <td>${staff.email}</td>
+                                            <td>${staff.shift}</td>
+                                            <td>${renderRatingStars(staff.Rating)}</td>
+                                            <td>${staff.salary}</td>
+                                            <td>
+                                                <button class="btn view-btn" onclick="viewStaff(${staff.id})">View</button>
+                                                <button class="btn edit-btn" onclick="editStaff(${staff.id})">Edit</button>
+                                                <button class="btn delete-btn" onclick="deleteStaff(${staff.id})">Delete</button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            <!-- Add Staff Button -->
+                            <section class="add-staff">
+                                <button class="btn add-btn" onclick="addStaff()">Add New Staff</button>
+                            </section>
+                        </section>
+                    </div>
+                </section>
+            `;
+
+            // Inject the content into the main content area
+            mainContent.innerHTML = StaffContent;
+        }
+
+
+        // Function to handle "View" button - Show staff details in a modal or on a new page
+        function viewStaff(id) {
+            const staffDetails = getStaffDetailsById(id);
+            showStaffDetailsModal(staffDetails);
+        }
+
+        // Function to handle "Edit" button - Open a form to edit staff details
+        function editStaff(id) {
+            const staffDetails = getStaffDetailsById(id);
+            openEditStaffForm(staffDetails);
+        }
+
+        // Function to handle "Delete" button - Delete staff and update the table
+        function deleteStaff(id) {
+            if (confirm(`Are you sure you want to delete staff with ID: ${id}?`)) {
+                // Remove from staffData array
+                staffData = staffData.filter(staff => staff.id !== id);
+                showStaff(); // Re-render the table with updated data
+            }
+        }
+
+        // Function to handle "Add New Staff" button - Open a form to add new staff
+        function addStaff() {
+            openAddStaffForm();
+        }
+
+        // Helper functions
+        function getStaffDetailsById(id) {
+            return staffData.find(staff => staff.id === id);
+        }
+
+        function showStaffDetailsModal(staffDetails) {
+            // Create the modal overlay and modal container
+            const modalOverlay = document.createElement('div');
+            modalOverlay.classList.add('modal-overlay');
+            
+            const modal = document.createElement('div');
+            modal.classList.add('modal');
+            
+            // Function to convert performance score to star rating
+            const getRatingStars = (Rating) => {
+                const totalStars = 5; // total number of stars (you can adjust this)
+                const fullStars = Math.round(Rating); // rounded performance to nearest integer
+                let stars = '';
+                
+                // Add full stars
+                for (let i = 0; i < fullStars; i++) {
+                    stars += '★'; // full star
+                }
+
+                // Add empty stars
+                for (let i = fullStars; i < totalStars; i++) {
+                    stars += '☆'; // empty star
+                }
+
+                return stars;
+            };
+
+            // Populate the modal with staff details
+            modal.innerHTML = `
+                <h3>Staff Details</h3>
+                <p>ID: ${staffDetails.id}</p>
+                <p>Name: ${staffDetails.name}</p>
+                <p>Role: ${staffDetails.role}</p>
+                <p>Email: ${staffDetails.email}</p>
+                <p>Shift: ${staffDetails.shift}</p>
+                <p>Rating: ${getRatingStars(staffDetails.Rating)}</p>
+                <p>Salary: ${staffDetails.salary}</p>
+                <button class="close-btn">Close</button>
+            `;
+
+            // Append modal to the overlay
+            modalOverlay.appendChild(modal);
+
+            // Append modalOverlay to the document body
+            document.body.appendChild(modalOverlay);
+
+            // Add close functionality
+            const closeButton = modal.querySelector('.close-btn');
+            closeButton.addEventListener('click', closeModal);
+
+            // Add CSS styles for the modal dynamically
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .modal-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                }
+                .modal {
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    width: 300px;
+                    text-align: center;
+                }
+                .modal button {
+                    margin-top: 20px;
+                    padding: 10px 15px;
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                .modal button:hover {
+                    background-color: #0056b3;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function closeModal() {
+            const modalOverlay = document.querySelector('.modal-overlay');
+            if (modalOverlay) {
+                modalOverlay.remove();
+            }
+        }
+
+
+        function openEditStaffForm(staffDetails) {
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.classList.add('form-overlay');
+            document.body.appendChild(overlay);
+
+            const editForm = `
+                <div class="form">
+                    <div class="form-header">
+                        <h3>Edit Staff</h3>
+                        <span id="closeButton" class="close-icon">×</span>
+                    </div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" value="${staffDetails.name}">
+                    <label for="role">Role:</label>
+                    <input type="text" id="role" value="${staffDetails.role}">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" value="${staffDetails.email}">
+                    <label for="shift">Shift:</label>
+                    <input type="text" id="shift" value="${staffDetails.shift}">
+                    <label for="salary">Salary:</label>
+                    <input type="text" id="salary" value="${staffDetails.salary}">
+                    <label for="Rating" class="rating-label">Rating:</label>
+                    <div id="Rating" class="star-rating">
+                        ${getStarRatingHTML(staffDetails.Rating)}
+                    </div>
+                    <div class="form-buttons">
+                        <button id="saveButton">Save</button>
+                    </div>
+                    
+                </div>
+
+
+            `;
+
+            document.body.innerHTML += editForm;
+
+            // Add event listener for the Save button
+            document.getElementById('saveButton').addEventListener('click', function() {
+                saveEditStaff(staffDetails.id); // Pass the staff ID here
+            });
+
+            // Add event listener for the Close button (X icon)
+            document.getElementById('closeButton').addEventListener('click', function() {
+                closeForm();
+            });
+
+            // Add event listeners for the star rating
+            const stars = document.querySelectorAll('.star-rating .star');
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function() {
+                    setRating(index + 1); // Index is 0-based, so +1 for rating
+                });
+            });
+
+            function setRating(rating) {
+                const stars = document.querySelectorAll('.star-rating .star');
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add('filled');
+                    } else {
+                        star.classList.remove('filled');
+                    }
+                });
+                // Save the rating to the staff data
+                document.getElementById('Rating').dataset.rating = rating;
+            }
+
+            // Set the initial rating from the staffDetails
+            setRating(staffDetails.Rating);
+        }
+
+        function getStarRatingHTML(currentRating) {
+            let starsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHTML += `<span class="star ${i <= currentRating ? 'filled' : ''}" data-index="${i}">&#9733;</span>`;
+            }
+            return starsHTML;
+        }
+
+        function saveEditStaff(id) {
+            const updatedStaff = {
+                id: id,
+                name: document.getElementById('name').value,
+                role: document.getElementById('role').value,
+                email: document.getElementById('email').value,
+                shift: document.getElementById('shift').value,
+                Rating: document.getElementById('Rating').dataset.rating || 0, // Get rating from the data attribute
+                salary: document.getElementById('salary').value
+            };
+
+            // Update staff data in staffData array
+            const index = staffData.findIndex(staff => staff.id === id);
+            if (index !== -1) {
+                staffData[index] = updatedStaff;
+            }
+
+            // Re-render the staff table with updated data
+            showStaff();
+
+            // Close the form
+            closeForm();
+        }
+
+        function closeForm() {
+            // Remove the form and the overlay from the DOM
+            const form = document.querySelector('.form');
+            const overlay = document.querySelector('.form-overlay');
+            
+            if (form) {
+                form.remove();
+            }
+            
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        
+       
+        function openAddStaffForm() {
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.classList.add('form-overlay');
+            document.body.appendChild(overlay);
+            
+            const addForm = `
+                <div class="form">
+                    <h3>Add New Staff</h3>
+                    <span id="closeButton" class="close-icon">×</span>
+                    <label for="new-name">Name:</label>
+                    <input type="text" id="new-name">
+                    <label for="new-role">Role:</label>
+                    <input type="text" id="new-role">
+                    <label for="new-email">Email:</label>
+                    <input type="email" id="new-email">
+                    <label for="new-shift">Shift:</label>
+                    <input type="text" id="new-shift">
+                    <label for="new-Rating">Rating:</label>
+                    <input type="number" id="new-Rating">
+                    <label for="new-salary">Salary:</label>
+                    <input type="text" id="new-salary">
+                    <button onclick="saveNewStaff()">Save</button>
+                </div>
+            `;
+            document.body.innerHTML += addForm;
+
+            // Add event listener for the close button
+            const closeButton = document.getElementById('closeButton');
+            closeButton.addEventListener('click', closeForm);
+
+            // Add event listener for overlay to close the form
+            overlay.addEventListener('click', closeForm);
+        }
+
+        function closeForm() {
+            // Remove the form and the overlay from the DOM
+            const form = document.querySelector('.form');
+            const overlay = document.querySelector('.form-overlay');
+            
+            if (form) {
+                form.remove();
+            }
+            
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        function saveNewStaff() {
+            const newStaff = {
+                id: staffData.length + 1,  // Generate new ID
+                name: document.getElementById('new-name').value,
+                role: document.getElementById('new-role').value,
+                email: document.getElementById('new-email').value,
+                shift: document.getElementById('new-shift').value,
+                Rating: document.getElementById('new-Rating').value,
+                salary: document.getElementById('new-salary').value
+            };
+
+            // Add the new staff to the staffData array
+            staffData.push(newStaff);
+
+            // Re-render the staff table with updated data
+            showStaff();
+
+            // Close the form
+            closeForm();
+        }
+
+
+
+        function showContact() {
+            const mainContent = document.getElementById('main-content');
+            const contactContent = `
+                <section id="contact-content" class="contact-section">
+                    <div style="text-align: center;"><img src="https://storage.googleapis.com/assets.cdp.blinkx.in/Blinkx_Website/icons/dodla-dairy-ltd.png" alt="Dairy Farm Logo" class="animated-image">
+                    </div>
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <h2>Contact Details</h2>
+                            <p class="contact-item"><span>&#x1F4CD;</span> <strong>Dodla Dairy Limited</strong></p>
+                            <p class="contact-item"><span>&#x1F4CD;</span> 8-2-293/82/A, 270/Q, Road No 10-C, Jubilee Hills,</p>
+                            <p class="contact-item">Hyderabad – 500 033, Telangana, India</p>
+                            <p class="contact-item"><strong><span>&#x1F4DE;</span> Phone:</strong> <a href="Phone: 040-4546 7777">040-4546 7777</a></p>
+                            <p class="contact-item"><strong><span>&#x1F4F1;</span> Fax:</strong> <a href="fax:040-4546-7788">040-4546 7788</a></p>
+                            <p class="contact-item"><strong><span>&#x2709;</span> Email:</strong> <a href="mailto:mail@dodladairy.com">mail@dodladairy.com</a></p>
+                        </div>
+
+                        <!-- Embed Google Map on the right side -->
+                        <div class="contact-map">
+                            <iframe class="lazyloaded" loading="lazy" src="https://maps.google.com/maps?q=Dodla%20Dairy%20Ltd_Corporate%20Office&amp;t=m&amp;z=15&amp;output=embed&amp;iwloc=near" title="Dodla Dairy Ltd_Corporate Office" aria-label="Dodla Dairy Ltd_Corporate Office"></iframe>
+                        </div>
+                    </div>
+                </section>
+            `;
+            mainContent.innerHTML = contactContent;
+
+            // Add animation class after the content is loaded
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.5}s`; // Adding staggered delay
+                item.classList.add('fade-in');
+            });
+        }
+
+
+        function showProducts() {
+            const mainContent = document.getElementById('main-content');
+            const productsContent = `
+                <section id="products-content">
+                    <h2>Products</h2>
+                    <ul class="product-list">
+                        <li class="product-item" style="background-color:; " onclick="showMilkTypes()">
+                            <img src="https://cdn-icons-png.freepik.com/256/869/869664.png?ga=GA1.1.1298923287.1739357188&semt=ais_hybrid" alt="Milk Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Milk</h3>
+                                <p>Hygienically sourced fresh milk directly from farmers reach our chilling centres then processed and packaged in our dairy plants. Dodla Milk reaches your home pure and untouched by hand.</p>
+                            </div>
+                        </li>
+                        <li class="product-item" onclick="showCheeseTypes()">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNxoKjBpinYXkjofQZOMd6TBepHJ4QmjCz0w&s" alt="Cheese Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Cheese</h3>
+                                <p>A soft, delicate cheese made from fresh milk. Its creamy texture and mild flavor make it perfect.</p>
+                            </div>
+                        </li>
+                        <li class="product-item" onclick="showButterMilkTypes()">
+                            <img src="https://png.pngtree.com/png-vector/20220612/ourmid/pngtree-realistic-vector-milk-and-butter-in-bowl-isolated-on-white-background-png-image_5010364.png" alt="Butter Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Butter Milk</h3>
+                                <p>Madde with fresh curd & spices, our buttermilk is rich & refreshing which makes for a delightful summer.</p>
+                            </div>
+                        </li>
+                        <li class="product-item" onclick="showCurdTypes()">
+                            <img src="https://cdn-icons-png.flaticon.com/512/4681/4681850.png" alt="Curd Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Curd</h3>
+                                <p>Thick and tasty curd that brings health and variety to your meals come in a range of packages: pouches, cups, and buckets.</p>
+                            </div>
+                        </li>
+                        <li class="product-item" onclick="showGheeTypes()">
+                            <img src="https://static.vecteezy.com/system/resources/previews/029/745/406/non_2x/illustration-ghee-on-a-spoon-and-in-a-glass-jar-isolated-on-white-background-vector.jpg" alt="Ghee Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Ghee</h3>
+                                <p>Available in two variants namely ghee made from cow milk and buffalo milk, it's the secret that melts into your sweets, savouries and many other delicious dishes. </p>
+                            </div>
+                        </li>
+                        <li class="product-item" onclick="showPaneerTypes()">
+                            <img src="https://5.imimg.com/data5/FM/NN/UQ/IOS-18242838/product-jpeg.png" alt="Paneer Icon" class="product-icon">
+                            <div class="product-info">
+                                <h3>Paneer</h3>
+                                <p>A high-quality paneer, known for its rich texture and authentic taste. it's a versatile ingredient for traditional and new experimental recipes, perfect for curries, snacks, and appetizers.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            `;
+            mainContent.innerHTML = productsContent;
+        }
+
+
+        function showMilkTypes() {
+            const mainContent = document.getElementById('main-content');
+            const milkTypesContent = `
+                <section id="milk-types-content">
+                    <h2>Types of Milk</h2>
+                    <div class="card-container">
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Toned Milk</h3>
+                            <img src="https://dodladairy.com/wp-content/uploads/2024/12/toned-milk.png" alt="Milk Icon" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="toned-milk-quantity">Quantity 500ml:</label>
+                                <input type="number" id="toned-milk-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Toned Milk', document.getElementById('toned-milk-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Full-cream-milk</h3>
+                            <img src="https://dodladairy.com/wp-content/uploads/2024/01/Milk-Packets-Mockup-FCM-Final.png" alt="Milk Icon" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Full-cream-milk-quantity">Quantity 500ml:</label>
+                                <input type="number" id="Full-cream-milk-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Full-cream-milk', document.getElementById('Full-cream-milk-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">StandardisedMilk</h3>
+                            <img src="https://dodladairy.com/wp-content/uploads/2024/12/Standardised-Milk.png" alt="Milk Icon" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Standardised-milk-quantity">Quantity 500ml:</label>
+                                <input type="number" id="Standardised-milk-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Standardised-milk', document.getElementById('Standardised-milk-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showProducts()" style="background-color: #000; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Products</button>
+                </section>
+            `;
+            mainContent.innerHTML = milkTypesContent;
+        }
+
+        function orderMilk(milkType, quantity) {
+            alert(`You have ordered ${quantity} of ${milkType}.`);
+        }
+
+        
+        function showCheeseTypes() {
+            const mainContent = document.getElementById('main-content');
+            const cheeseTypesContent = `
+                <section id="cheese-types-content">
+                    <h2>Types of Cheese</h2>
+                    <div class="card-container">
+                       <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Cheddar Cheese</h3>
+                            <img src="https://blog.wisconsincheeseman.com/wp-content/uploads/sites/10/2023/06/Sharp-Cheddar-Cheese_new.jpg.webp" alt="Cheese" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Cheddar Cheese-quantity">Quantity 500 grms:</label>
+                                <input type="number" id="Cheddar Cheese-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Cheddar Cheese', document.getElementById('Cheddar Cheese-quantity').value)">Order</button>
+                            </div>
+                        </div>
+
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">MozzarellaCheese</h3>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6T0tTI0S4QrNmc-IsdOavPgu39u2RPLTOVQ&s" alt="Cheese" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Mozzarella Cheese-quantity">Quantity 500 grms:</label>
+                                <input type="number" id="Mozzarella Cheese-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Mozzarella Cheese', document.getElementById('Mozzarella Cheese-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Cream Cheese</h3>
+                            <img src="https://t3.ftcdn.net/jpg/02/48/59/80/360_F_248598017_BfGUL3FKf3bxp0BQK13fQefpEC6dVrUX.jpg" alt="Cheese" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Cream Cheese-quantity">Quantity 500 grms:</label>
+                                <input type="number" id="Cream Cheese-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Cream Cheese', document.getElementById('Cream Cheese-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showProducts()" style="background-color: #000; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Products</button>
+                </section>
+            `;
+            mainContent.innerHTML = cheeseTypesContent;
+        }
+
+        function showPaneerTypes() {
+            const mainContent = document.getElementById('main-content');
+            const paneerTypesContent = `
+                <section id="paneer-types-content">
+                    <h2>Types of Paneer</h2>
+                    <div class="card-container">
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;"> Regular Paneer</h3>
+                            <img src="https://4.imimg.com/data4/OE/IG/ANDROID-26417380/product-500x500.jpeg" alt="Cheese" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Regular Paneer-quantity">Quantity 500 grms:</label>
+                                <input type="number" id="Regular Paneer-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Regular Paneer', document.getElementById('Regular Paneer-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;"> Malai Paneer</h3>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTrJsBDXKZxLp5j0GJq-yNxxx8Zyu8bGqHaerM6hWDLqBbxldzLle9diuZ3Y8fIjQ3-hg&usqp=CAU" alt="Cheese" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Malai Paneer-quantity">Quantity 500 grms:</label>
+                                <input type="number" id="Malai Paneer-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Malai Paneer', document.getElementById('Malai Paneer-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showProducts()" style="background-color: #000; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Products</button>
+                </section>
+            `;
+            mainContent.innerHTML = paneerTypesContent;
+        }
+
+        function showButterMilkTypes() {
+            const mainContent = document.getElementById('main-content');
+            const butterTypesContent = `
+                <section id="butter-types-content">
+                    <h2>Types of Butter</h2>
+                    <div class="card-container">
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Jeera Buttermilk</h3>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpgP-x6SBxBrrAbL0fy8pQiN2_tKjM0uTN6w&s" alt="Buttermilk" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Jeera Buttermilk-quantity">Quantity 250 ml:</label>
+                                <input type="number" id="Jeera Buttermilk-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Jeera Buttermilk', document.getElementById('Jeera Buttermilk-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Buttermilk</h3>
+                            <img src="https://4.imimg.com/data4/AW/NW/GLADMIN-30674187/6.jpg" alt="Buttermilk" class="product-image" style="width: 90%; height: auto; object-fit: cover; margin-bottom: 290px;">
+                            <div class="card-content">
+                                <label for="Buttermilk-quantity">Quantity 250 ml:</label>
+                                <input type="number" id="Buttermilk-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Buttermilk', document.getElementById('Buttermilk-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showProducts()" style="background-color: #000; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Products</button>
+                </section>
+            `;
+            mainContent.innerHTML = butterTypesContent;
+        }
+
+        function showGheeTypes() {
+            const mainContent = document.getElementById('main-content');
+            const gheeTypesContent = `
+                <section id="ghee-types-content">
+                    <h2>Types of Ghee</h2>
+                    <div class="card-container">
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Buffalo Ghee</h3>
+                            <img src="https://dodladairy.com/wp-content/uploads/2024/02/Ghee.png" alt="Ghee" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Ghee-quantity">Quantity 200 grms:</label>
+                                <input type="number" id="Ghee-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Ghee', document.getElementById('Ghee-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Cow Ghee</h3>
+                            <img src="https://dodladairy.com/wp-content/uploads/2024/02/Cow-Ghee.png" alt="Ghee" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Ghee-quantity">Quantity 200 grms:</label>
+                                <input type="number" id="Ghee-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Ghee', document.getElementById('Ghee-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showProducts()" style="background-color: #000; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Products</button>
+                </section>
+            `;
+            mainContent.innerHTML = gheeTypesContent;
+        }
+
+        function showCurdTypes() {
+            const mainContent = document.getElementById('main-content');
+            const curdTypesContent = `
+                <section id="curd-types-content">
+                    <h2>Types of Curd</h2>
+                    <div class="card-container">
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Curd</h3>
+                            <img src="https://5.imimg.com/data5/SELLER/Default/2023/1/DF/GM/YW/85170453/dodla-curd-500x500.png" alt="Curd" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Curd-quantity">Quantity 200 grms:</label>
+                                <input type="number" id="Curd-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Curd', document.getElementById('Curd-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Curd</h3>
+                            <img src="https://dodladairy.com/wp-content/uploads/2024/01/Curd-Packet-Mockup-DTM.png" alt="Curd" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Curd-quantity">Quantity 200 grms:</label>
+                                <input type="number" id="Curd-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Curd', document.getElementById('Curd-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #f0f0f0; width: 200px; padding: 50px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;">
+                            <h3 style="margin-top: -40px; margin-bottom: 10px; text-align: center;">Curd</h3>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK8JGBpnF_yV7_bZiQxbCG3g0WDtJogSXXqQ&s" alt="Curd" class="product-image" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 30px;">
+                            <div class="card-content">
+                                <label for="Curd-quantity">Quantity 200 grms:</label>
+                                <input type="number" id="Curd-quantity" min="1" value="1">
+                                <button onclick="orderMilk('Curd', document.getElementById('Curd-quantity').value)">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="showProducts()" style="background-color: #000; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Products</button>
+                </section>
+            `;
+            mainContent.innerHTML = curdTypesContent;
+        }
+
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Function to update the date and time
+        function updateDateTime() {
+            const dateTime = new Date();
+            document.getElementById('date-time').innerText = `${dateTime.toLocaleTimeString()}`;
+        }
+
+        // Example data (This can be dynamic based on your backend API)
+        const statsData = {
+            milkProduction: 500, // in Liters
+            cattleCount: 100,
+            totalRevenue: 1200, // in rupees
+            feedConsumption: 300, // in kg
+            staffAttended: 12,
+            activeTasks: 8,
+            maintenanceTasks: 3
+        };
+
+        // Set stats on page load
+        document.getElementById('milk-production').innerText = `${statsData.milkProduction}L`;
+        document.getElementById('cattle-count').innerText = statsData.cattleCount;
+        document.getElementById('total-revenue').innerText = `₹${statsData.totalRevenue}`;
+        document.getElementById('feed-consumption').innerText = `${statsData.feedConsumption}kg`;
+        document.getElementById('staff-attended').innerText = statsData.staffAttended;
+        document.getElementById('active-tasks').innerText = statsData.activeTasks;
+        document.getElementById('maintenance-tasks').innerText = statsData.maintenanceTasks;
+
+        // Create sample charts using Chart.js
+        const ctxMilkProduction = document.getElementById('milk-production-chart').getContext('2d');
+        const ctxRevenue = document.getElementById('revenue-chart').getContext('2d');
+
+        const milkProductionChart = new Chart(ctxMilkProduction, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // months
+                datasets: [{
+                    label: 'Milk Production (L)',
+                    data: [400, 450, 500, 550, 600, 650],
+                    borderColor: '#80bbf1',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Milk Production Over Time'
+                    }
+                }
+            }
+        });
+
+        const revenueChart = new Chart(ctxRevenue, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // months
+                datasets: [{
+                    label: 'Revenue (₹)',
+                    data: [1000, 1100, 1200, 1300, 1400, 1500],
+                    backgroundColor: '#4ba352',
+                    borderColor: '#388E3C',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Revenue'
+                    }
+                }
+            }
+        });
+
+        // Update the date and time every second
+        setInterval(updateDateTime, 1000);
+
+        
+    </script>
+    <!-- Optional JavaScript to toggle the dropdown -->
+    <script>
+        document.querySelector('.lang-btn').addEventListener('click', function() {
+            var dropdown = document.querySelector('.lang-dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+    </script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    // Initialize charts
+    let dairyProductsChart, animalHealthChart, productSalesChart, deliveryLogisticsChart;
+
+    // Data for charts (use your actual data here)
+    const dairyData = {
+        daily: [9000, 2000, 4000, 6500],
+        weekly: [63000, 14000, 28000, 45500],
+        yearly: [3285000, 730000, 1460000, 2372500]
+    };
+
+    const healthData = {
+        daily: [50, 40, 15, 5],
+        weekly: [80, 120, 100, 50],
+        yearly: [600, 800, 750, 500]
+    };
+
+    const productSalesData = {
+        daily: [5, 8, 10, 12],
+        weekly: [50, 70, 80, 40],
+        yearly: [500, 700, 800, 600]
+    };
+
+    const deliveryData = {
+        daily: [10, 15, 20, 25],
+        weekly: [70, 100, 90, 120],
+        yearly: [700, 900, 1100, 950]
+    };
+
+    // Update Dairy Products Chart
+    function updateDairyChartData() {
+        const period = document.getElementById("sales-filter").value;
+        const data = dairyData[period];
+        if (dairyProductsChart) {
+            dairyProductsChart.destroy();
+        }
+        dairyProductsChart = new Chart(document.getElementById("dairy-products-sales-chart"), {
+            type: 'pie',
+            data: {
+                labels: ['Milk (ltr)', 'Ghee (ltr)', 'Paneer (kg)', 'Curd (kg)'],
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return context.label +  ": " + context.raw + "";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Update Animal Health Chart
+    function updateHealthChartData() {
+        const period = document.getElementById("health-filter").value;
+        const data = healthData[period];
+        if (animalHealthChart) {
+            animalHealthChart.destroy();
+        }
+        animalHealthChart = new Chart(document.getElementById("animal-health-chart"), {
+            type: 'doughnut',
+            data: {
+                labels: ['Healthy', 'Stable', 'Sick', 'Critical'],
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['#99ff99', '#66b3ff', '#ff9999', '#ffcc99'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return context.label + ": " + context.raw + "";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Update Product Sales Chart
+    function updateProductSalesChartData() {
+        const period = document.getElementById("product-sales-filter").value;
+        const data = productSalesData[period];
+        if (productSalesChart) {
+            productSalesChart.destroy();
+        }
+        productSalesChart = new Chart(document.getElementById("product-sales-chart"), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+                datasets: [{
+                    label: 'Sales (Units)',
+                    data: data,
+                    borderColor: '#478be4',
+                    backgroundColor: 'rgba(71, 139, 228, 0.2)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    // Update Delivery and Logistics Chart
+    function updateDeliveryChartData() {
+        const period = document.getElementById("delivery-filter").value;
+        const data = deliveryData[period];
+        if (deliveryLogisticsChart) {
+            deliveryLogisticsChart.destroy();
+        }
+        deliveryLogisticsChart = new Chart(document.getElementById("delivery-logistics-chart"), {
+            type: 'bar',
+            data: {
+                labels: ['Ghee', 'Paneer', 'Curd', 'Milk'],
+                datasets: [{
+                    label: 'Deliveries',
+                    data: data,
+                    backgroundColor: '#478be4',
+                    borderColor: '#478be4',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    // Initial chart render
+    updateDairyChartData();
+    updateHealthChartData();
+    updateProductSalesChartData();
+    updateDeliveryChartData();
+
+    </script>
+    <script>
+        // Show dropdown on button hover
+        document.querySelector('.lang-btn').addEventListener('mouseenter', function() {
+            document.querySelector('.lang-dropdown-content').style.display = 'block';
+        });
+    
+        // Hide dropdown when mouse leaves
+        document.querySelector('.language-dropdown').addEventListener('mouseleave', function() {
+            document.querySelector('.lang-dropdown-content').style.display = 'none';
+        });
+    </script>
+    <script>
+        // Function to show the home content
+        function showHome() {
+            const mainContent = document.getElementById('main-content');
+            mainContent.innerHTML = `
+                <section id="home-content" class="description" >
+                    <header style="text-align: center; margin-top: 1370px;">
+                    </header>
+
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 13px; justify-content: space-evenly; margin-top: 10px;">
+                        <!-- Milk Production Today -->
+                        <div style="width: 21%; background-color: #f4f7fb; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #478be4; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/milk.png" alt="Milk Production" style="width: 50px; height: 60px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #478be4; margin-left: 0px;">
+                                    Milk Production Today
+                                </h3>
+                                <p id="milk-production" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 65px">500L</p>
+                            </div>
+                        </div>
+
+                        <!-- Cattle Count -->
+                        <div style="width: 21%; background-color: #f0f9ff; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #67c8ff; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/cattle.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #67c8ff; margin-left: 39px;">
+                                    Cattle Count
+                                </h3>
+                                <p id="cattle-count" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 75px">100</p>
+                            </div>
+                        </div>
+
+                        <!-- Total Revenue -->
+                        <div style="width: 21%; background-color: #e7f6f1; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #55d28b; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/revenue.png" alt="Milk Production" style="width:  70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #55d28b; margin-left: 30px;">Total Revenue</h3>
+                                <p id="total-revenue" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 60px">₹1200</p>
+                            </div>
+                        </div>
+
+                        <!-- Feed Consumption -->
+                        <div style="width: 21%; background-color: #fff9e5; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #fbc02d; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/feed.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #fbc02d; margin-left: 15px;">Feed Consumption</h3>
+                                <p id="feed-consumption" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 65px">300kg</p>
+                            </div>
+                        </div>
+
+                        <!-- Staff Attended -->
+                        <div style="width: 21%; background-color: #f1e8ff; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #9a63c5; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/staff.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #9a63c5; margin-left: 30px;">Staff Attended</h3>
+                                <p id="staff-attended" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 70px;">12</p>
+                            </div>
+                        </div>
+
+                        <!-- Active Tasks -->
+                        <div style="width: 21%; background-color: #e8f4f4; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #4cb7b7; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/tasks.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #4cb7b7; margin-left: 45px;">Active Tasks</h3>
+                                <p id="active-tasks" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 90px;">8</p>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance Tasks -->
+                        <div style="width: 21%; background-color: #f5e5ff; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #9b4cd4; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/maintenance.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #9b4cd4; margin-left: 15px;">Maintenance Tasks</h3>
+                                <p id="maintenance-tasks" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 75px">3</p>
+                            </div>
+                        </div>
+
+                        <!-- Veterinary Visits -->
+                        <div style="width: 21%; background-color: #d3e4f4; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: left; border-left: 6px solid #4591d9; height: 60px; display: flex; align-items: center;">
+                            <img src="Images/veterinary.png" alt="Milk Production" style="width: 70px; height: 70px; margin-right: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2em; color: #4591d9; margin-left: 15px;">Veterinary Visits</h3>
+                                <p id="veterinary-visits" style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0; margin-left: 75px">2</p>
+                            </div>
+                        </div>
+
+
+                    <!-- Container for the four charts -->
+                    <div style="display: flex; justify-content: space-between; gap: 20px; margin-top: 3px;">
+
+                        <!-- Dairy Products Sales Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Production Analysis</h3>
+
+                            <!-- Filter Dropdown for Sales Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="sales-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Sales Period:</label>
+                                <select id="sales-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateDairyChartData()">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+
+                            <!-- Pie chart for Dairy Products Sales -->
+                            <canvas id="dairy-products-sales-chart" style="width: 570px; height: 100px;"></canvas>
+                        </div>
+
+                        <!-- Animal Health Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Animal Health</h3>
+
+                            <!-- Filter Dropdown for Health Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="health-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Animal:</label>
+                                <select id="health-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateHealthChartData()">
+                                    <option value="daily">Buffalo</option>
+                                    <option value="weekly">Cow</option>
+                                    <option value="yearly">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Donut chart for Animal Health -->
+                            <canvas id="animal-health-chart" style="width: 570px; height: 100px;"></canvas>
+                        </div>
+                    </div>
+
+
+                    <div style="display: flex; justify-content: space-between; gap: 20px; margin-top: 3px;">
+                        <!-- Product Sales Line Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Product Sales</h3>
+
+                            <!-- Filter Dropdown for Product Sales Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="product-sales-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Product:</label>
+                                <select id="product-sales-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateProductSalesChartData()">
+                                    <option value="daily">Milk</option>
+                                    <option value="weekly">Curd</option>
+                                    <option value="yearly">Ghee</option>
+                                    <option value="yearly">Paneer</option>
+
+                                </select>
+                            </div>
+
+                            <!-- Line chart for Product Sales -->
+                            <canvas id="product-sales-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+
+                        <!-- Delivery and Logistics Bar Chart -->
+                        <div style="flex: 1; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Delivery and Logistics</h3>
+
+                            <!-- Filter Dropdown for Delivery Period -->
+                            <div style="font-family: Arial, sans-serif; margin-bottom: 20px;">
+                                <label for="delivery-filter" style="font-size: 1em; margin-bottom: 10px; display: block; color: #333;">Select Delivery Period:</label>
+                                <select id="delivery-filter" style="padding: 10px; font-size: 1em; width: 100%; border-radius: 4px; border: 1px solid #ccc; background-color: #dceff8;" onchange="updateDeliveryChartData()">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+
+                            <!-- Bar chart for Delivery and Logistics -->
+                            <canvas id="delivery-logistics-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    
+                    
+                    <!-- Bottom Sections for Graphs -->
+                    <div style="margin-top: 3px; display: flex; justify-content: space-between; gap: 20px;">
+                        <div style="width: 48%; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Milk Production Over Time</h3>
+                            <canvas id="milk-production-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+                        <div style="width: 48%; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 1.2em; color: #478be4;">Revenue</h3>
+                            <canvas id="revenue-chart" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+                    </div>
+                
+                </section>
+            `;
+            initializeCharts(); // Initialize the charts
+        }
+
+        // Initialize all the charts on the page
+        function initializeCharts() {
+            // Dummy data for charts, replace with actual data
+            const dairyProductsSalesChart = new Chart(document.getElementById('dairy-products-sales-chart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Milk', 'Curd', 'Ghee', 'Paneer'],
+                    datasets: [{
+                        label: 'Dairy Products Sales',
+                        data: [200, 150, 50, 100], // Replace with actual data
+                        backgroundColor: ['#478be4', '#67c8ff', '#55d28b', '#fbc02d']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            const animalHealthChart = new Chart(document.getElementById('animal-health-chart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Buffalo', 'Cow', 'Other'],
+                    datasets: [{
+                        data: [60, 30, 10], // Replace with actual data
+                        backgroundColor: ['#478be4', '#67c8ff', '#55d28b']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            const productSalesChart = new Chart(document.getElementById('product-sales-chart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Milk Sales',
+                        data: [500, 600, 550, 700, 800], // Replace with actual data
+                        borderColor: '#478be4',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            const deliveryLogisticsChart = new Chart(document.getElementById('delivery-logistics-chart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Deliveries',
+                        data: [200, 250, 300, 350, 400], // Replace with actual data
+                        backgroundColor: '#478be4'
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            const milkProductionChart = new Chart(document.getElementById('milk-production-chart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Milk Production (L)',
+                        data: [1000, 1100, 1200, 1300, 1400], // Replace with actual data
+                        borderColor: '#478be4',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            const revenueChart = new Chart(document.getElementById('revenue-chart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Revenue (₹)',
+                        data: [1500, 1600, 1700, 1800, 1900], // Replace with actual data
+                        borderColor: '#478be4',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        // Function to update Dairy Products Sales chart based on selected filter
+        function updateDairyChartData() {
+            const salesPeriod = document.getElementById('sales-filter').value;
+            // Fetch or process the relevant data for the selected period (daily/weekly/yearly)
+            // Dummy data for demonstration
+            const data = salesPeriod === 'daily' ? [200, 150, 50, 100] : salesPeriod === 'weekly' ? [1000, 900, 600, 1200] : [4000, 3500, 1500, 2500];
+            const dairyProductsSalesChart = Chart.instances[0];
+            dairyProductsSalesChart.data.datasets[0].data = data;
+            dairyProductsSalesChart.update();
+        }
+
+        // Function to update Animal Health chart based on selected filter
+        function updateHealthChartData() {
+            const animal = document.getElementById('health-filter').value;
+            // Fetch or process the relevant data for the selected animal (Buffalo/Cow/Other)
+            // Dummy data for demonstration
+            const data = animal === 'daily' ? [60, 30, 10] : animal === 'weekly' ? [200, 150, 50] : [600, 300, 100];
+            const animalHealthChart = Chart.instances[1];
+            animalHealthChart.data.datasets[0].data = data;
+            animalHealthChart.update();
+        }
+
+        // Function to update Product Sales chart based on selected product
+        function updateProductSalesChartData() {
+            const product = document.getElementById('product-sales-filter').value;
+            // Fetch or process the relevant data for the selected product (Milk/Curd/Ghee/Paneer)
+            // Dummy data for demonstration
+            const data = product === 'daily' ? [500, 600, 550, 700] : product === 'weekly' ? [2500, 2200, 2700, 3200] : [10000, 11000, 12000, 13000];
+            const productSalesChart = Chart.instances[2];
+            productSalesChart.data.datasets[0].data = data;
+            productSalesChart.update();
+        }
+
+        // Function to update Delivery chart based on selected period
+        function updateDeliveryChartData() {
+            const deliveryPeriod = document.getElementById('delivery-filter').value;
+            // Fetch or process the relevant data for the selected delivery period (daily/weekly/yearly)
+            // Dummy data for demonstration
+            const data = deliveryPeriod === 'daily' ? [200, 250, 300, 350] : deliveryPeriod === 'weekly' ? [1000, 1200, 1500, 1700] : [4000, 4500, 5000, 5500];
+            const deliveryLogisticsChart = Chart.instances[3];
+            deliveryLogisticsChart.data.datasets[0].data = data;
+            deliveryLogisticsChart.update();
+        }
+
+    </script>
+    <script>
+        // Example of toggling the sidebar
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+        document.body.classList.toggle('sidebar-open');
+        });
+
+    </script>
+</body>
+</html>
